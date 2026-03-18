@@ -905,7 +905,15 @@ body {
 .music-toggle svg {
   width: 20px;
   height: 20px;
-  fill: var(--cream);
+}
+
+.music-toggle.playing {
+  animation: musicPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+  0%, 100% { box-shadow: 0 4px 15px rgba(139,72,64,0.3); }
+  50% { box-shadow: 0 4px 25px rgba(139,72,64,0.5); }
 }
 
 /* Form success state */
@@ -1021,9 +1029,170 @@ body {
     height: 320px;
   }
 }
+/* ========== WELCOME SCREEN ========== */
+.welcome-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.welcome-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.welcome-floral-top {
+  position: absolute;
+  top: -20px;
+  right: -40px;
+  width: 200px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.welcome-floral-bottom {
+  position: absolute;
+  bottom: -10px;
+  left: -30px;
+  width: 180px;
+  opacity: 0.5;
+  transform: scaleX(-1);
+  pointer-events: none;
+}
+
+.welcome-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: var(--text-light);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  animation: welcomeFade 1s ease-out 0.3s both;
+}
+
+.welcome-names {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2.8rem, 9vw, 4.5rem);
+  color: var(--terracotta);
+  line-height: 1.15;
+  font-weight: 500;
+  margin-bottom: 8px;
+  animation: welcomeFade 1s ease-out 0.5s both;
+}
+
+.welcome-names .welcome-amp {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.6em;
+  color: var(--terracotta-light);
+  display: block;
+  margin: 2px 0;
+}
+
+.welcome-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  color: var(--text-medium);
+  letter-spacing: 5px;
+  font-weight: 300;
+  margin-bottom: 50px;
+  animation: welcomeFade 1s ease-out 0.7s both;
+}
+
+.welcome-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 40px;
+  border: 1.5px solid var(--terracotta);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--terracotta);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: welcomeFade 1s ease-out 1s both;
+}
+
+.welcome-btn:hover {
+  background: var(--terracotta);
+  color: var(--cream);
+}
+
+.welcome-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@keyframes welcomeFade {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hide main content until welcome is dismissed */
+body.welcome-active {
+  overflow: hidden;
+}
 </style>
 </head>
-<body>
+<body class="welcome-active">
+
+<!-- ==================== WELCOME SCREEN ==================== -->
+<div class="welcome-screen" id="welcomeScreen">
+  <svg class="welcome-floral-top" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+    <g opacity="0.6">
+      <ellipse cx="200" cy="80" rx="35" ry="18" fill="#C08B85" transform="rotate(-20 200 80)"/>
+      <ellipse cx="200" cy="80" rx="35" ry="18" fill="#D4A5A0" transform="rotate(70 200 80)"/>
+      <ellipse cx="200" cy="80" rx="35" ry="18" fill="#C08B85" transform="rotate(160 200 80)"/>
+      <circle cx="200" cy="80" r="10" fill="#C4A55A"/>
+      <ellipse cx="250" cy="160" rx="25" ry="12" fill="#DBC97E" transform="rotate(10 250 160)"/>
+      <ellipse cx="250" cy="160" rx="25" ry="12" fill="#DBC97E" transform="rotate(100 250 160)"/>
+      <circle cx="250" cy="160" r="7" fill="#8B4840"/>
+      <path d="M180 120 Q160 140 170 170" stroke="#5C6B4A" fill="none" stroke-width="2"/>
+      <ellipse cx="160" cy="145" rx="18" ry="8" fill="#5C6B4A" opacity="0.5" transform="rotate(-40 160 145)"/>
+    </g>
+  </svg>
+  <svg class="welcome-floral-bottom" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+    <g opacity="0.5">
+      <ellipse cx="80" cy="180" rx="28" ry="14" fill="#D4A5A0" transform="rotate(15 80 180)"/>
+      <ellipse cx="80" cy="180" rx="28" ry="14" fill="#C08B85" transform="rotate(105 80 180)"/>
+      <circle cx="80" cy="180" r="8" fill="#DBC97E"/>
+      <ellipse cx="40" cy="140" rx="16" ry="7" fill="#5C6B4A" opacity="0.5" transform="rotate(-30 40 140)"/>
+      <ellipse cx="150" cy="150" rx="16" ry="8" fill="#DBC97E" opacity="0.6" transform="rotate(0 150 150)"/>
+      <ellipse cx="150" cy="150" rx="16" ry="8" fill="#C4A55A" opacity="0.6" transform="rotate(120 150 150)"/>
+    </g>
+  </svg>
+  
+  <p class="welcome-subtitle">Estáis invitados</p>
+  <h1 class="welcome-names">
+    Carlos
+    <span class="welcome-amp">y</span>
+    Natalia
+  </h1>
+  <p class="welcome-date">11 · 07 · 2026</p>
+  
+  <button class="welcome-btn" onclick="enterInvitation()">
+    <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    Abrir invitación
+  </button>
+</div>
 
 <!-- ==================== HERO ==================== -->
 <section class="hero" id="inicio">
@@ -1288,6 +1457,21 @@ body {
   </div>
 </section>
 
+<!-- Music -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-toggle" id="musicBtn" onclick="toggleMusic()" aria-label="Música">
+  <svg id="musicIconOn" viewBox="0 0 24 24" fill="var(--cream)" style="display:none">
+    <path d="M9 18V5l12-2v13M9 18c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3zM21 16c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3z"/>
+  </svg>
+  <svg id="musicIconOff" viewBox="0 0 24 24" fill="var(--cream)">
+    <path d="M9 18V5l12-2v13M9 18c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3zM21 16c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3z"/>
+    <line x1="3" y1="3" x2="21" y2="21" stroke="var(--cream)" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+</button>
+
 <script>
 
 const WEBHOOK_URL = 'https://apuleyo-n8n.opxlub.easypanel.host/webhook/boda-cn';
@@ -1391,10 +1575,12 @@ document.getElementById('rsvpForm').addEventListener('submit', async function(e)
   
   try {
     const response = await fetch(WEBHOOK_URL, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(data)
-  });
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    
+    if (!response.ok) throw new Error('Response not ok');
     
     this.style.display = 'none';
     document.getElementById('formSuccess').classList.add('show');
@@ -1416,8 +1602,55 @@ window.addEventListener('scroll', () => {
   }
 });
 
+// ===== WELCOME SCREEN & MUSIC AUTOPLAY =====
+function enterInvitation() {
+  const welcome = document.getElementById('welcomeScreen');
+  const audio = document.getElementById('bgMusic');
+  const btn = document.getElementById('musicBtn');
+  const iconOn = document.getElementById('musicIconOn');
+  const iconOff = document.getElementById('musicIconOff');
+  
+  // Hide welcome screen
+  welcome.classList.add('hidden');
+  document.body.classList.remove('welcome-active');
+  
+  // Start music (allowed because user clicked)
+  audio.play().then(() => {
+    musicPlaying = true;
+    btn.classList.add('playing');
+    iconOn.style.display = 'block';
+    iconOff.style.display = 'none';
+  }).catch(() => {
+    // If autoplay still fails, just continue silently
+    musicPlaying = false;
+  });
+}
+
+// ===== MUSIC TOGGLE =====
+let musicPlaying = false;
+function toggleMusic() {
+  const audio = document.getElementById('bgMusic');
+  const btn = document.getElementById('musicBtn');
+  const iconOn = document.getElementById('musicIconOn');
+  const iconOff = document.getElementById('musicIconOff');
+  
+  if (musicPlaying) {
+    audio.pause();
+    btn.classList.remove('playing');
+    iconOn.style.display = 'none';
+    iconOff.style.display = 'block';
+  } else {
+    audio.play();
+    btn.classList.add('playing');
+    iconOn.style.display = 'block';
+    iconOff.style.display = 'none';
+  }
+  musicPlaying = !musicPlaying;
+}
+
 
 </script>
 
 </body>
+
 </html>

@@ -1421,42 +1421,7 @@ window.addEventListener('scroll', () => {
   }
 });
 
-/*
-=============================================================
-INSTRUCCIONES PARA GUARDAR DATOS
-=============================================================
 
---- OPCIÓN 1: N8N (RECOMENDADA) ---
-1. Crea un nuevo workflow en N8N
-2. Añade un nodo "Webhook" → método POST → copia la URL de producción
-3. Añade un nodo "Google Sheets" → conecta con tu cuenta
-4. Mapea los campos: nombre, acompanantes, nombres_acompanantes, intolerancias, fecha_envio
-5. Pega la URL del webhook en WEBHOOK_URL arriba
-
---- OPCIÓN 2: GOOGLE APPS SCRIPT ---
-1. Crea una Google Sheet con columnas: Nombre | Acompañantes | Nombres Acompañantes | Intolerancias | Fecha
-2. Ve a Extensiones → Apps Script
-3. Pega este código:
-
-function doPost(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var data = JSON.parse(e.postData.contents);
-  sheet.appendRow([
-    data.nombre,
-    data.acompanantes,
-    data.nombres_acompanantes,
-    data.intolerancias,
-    data.fecha_envio
-  ]);
-  return ContentService.createTextOutput(
-    JSON.stringify({status: 'ok'})
-  ).setMimeType(ContentService.MimeType.JSON);
-}
-
-4. Implementar → Nueva implementación → Aplicación web → "Cualquiera" puede acceder
-5. Copia la URL y pégala en WEBHOOK_URL arriba
-=============================================================
-*/
 </script>
 
 </body>

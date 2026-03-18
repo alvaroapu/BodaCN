@@ -848,29 +848,45 @@ body {
   }
 }
 
-/* ========== COUNTDOWN ========== */
-.countdown {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 30px;
+/* ========== HERO COUNTDOWN ========== */
+.hero-countdown-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: var(--text-light);
+  font-style: italic;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
-.countdown-item {
+/* ========== SEE YOU SECTION ========== */
+.seeyou-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.4rem, 5vw, 1.8rem);
+  color: var(--terracotta);
+  margin-bottom: 24px;
+}
+
+.seeyou-countdown {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+}
+
+.seeyou-item {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.countdown-number {
+.seeyou-number {
   font-family: 'Dancing Script', cursive;
-  font-size: 2rem;
+  font-size: 2.4rem;
   color: var(--terracotta);
   font-weight: 600;
   line-height: 1;
 }
 
-.countdown-label {
+.seeyou-label {
   font-family: 'Cormorant Garamond', serif;
   font-size: 0.75rem;
   color: var(--text-light);
@@ -1235,6 +1251,7 @@ body.welcome-active {
 
   <div class="hero-content">
     <p class="hero-subtitle">¡Nos casamos!</p>
+    <p class="hero-subtitle" style="margin-top:-4px; font-size:0.95rem;">¿Vienes a bailarlo con nosotros?</p>
     
     <h1 class="hero-names">
       Carlos
@@ -1242,24 +1259,25 @@ body.welcome-active {
       Natalia
     </h1>
     
-    <p class="hero-date">11 · 07 · 2026</p>
-    
     <div class="hero-photo-wrapper">
       <img src="pareja.png" alt="Carlos y Natalia">
     </div>
     
-    <div class="countdown" id="countdown">
-      <div class="countdown-item">
-        <span class="countdown-number" id="countdown-days">--</span>
-        <span class="countdown-label">Días</span>
+    <p class="hero-date">11 · 07 · 2026</p>
+    
+    <p class="hero-countdown-label">Nos vemos en</p>
+    <div class="seeyou-countdown" style="margin-bottom:0;">
+      <div class="seeyou-item">
+        <span class="seeyou-number" id="countdown-days">--</span>
+        <span class="seeyou-label">Días</span>
       </div>
-      <div class="countdown-item">
-        <span class="countdown-number" id="countdown-hours">--</span>
-        <span class="countdown-label">Horas</span>
+      <div class="seeyou-item">
+        <span class="seeyou-number" id="countdown-hours">--</span>
+        <span class="seeyou-label">Horas</span>
       </div>
-      <div class="countdown-item">
-        <span class="countdown-number" id="countdown-mins">--</span>
-        <span class="countdown-label">Min</span>
+      <div class="seeyou-item">
+        <span class="seeyou-number" id="countdown-mins">--</span>
+        <span class="seeyou-label">Min</span>
       </div>
     </div>
   </div>
@@ -1434,6 +1452,27 @@ body.welcome-active {
   </div>
 </section>
 
+<!-- ==================== SEE YOU SOON ==================== -->
+<section class="closing" style="padding-top:40px; padding-bottom:20px;">
+  <div class="container" style="text-align:center;">
+    <p class="seeyou-title reveal">¡Allí nos vemos!</p>
+    <div class="seeyou-countdown reveal reveal-delay-1">
+      <div class="seeyou-item">
+        <span class="seeyou-number" id="seeyou-days">--</span>
+        <span class="seeyou-label">Días</span>
+      </div>
+      <div class="seeyou-item">
+        <span class="seeyou-number" id="seeyou-hours">--</span>
+        <span class="seeyou-label">Horas</span>
+      </div>
+      <div class="seeyou-item">
+        <span class="seeyou-number" id="seeyou-mins">--</span>
+        <span class="seeyou-label">Min</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== CLOSING ==================== -->
 <section class="closing">
   <div class="container">
@@ -1496,6 +1535,14 @@ function updateCountdown() {
   document.getElementById('countdown-days').textContent = days;
   document.getElementById('countdown-hours').textContent = hours;
   document.getElementById('countdown-mins').textContent = mins;
+  
+  // See you countdown
+  const sd = document.getElementById('seeyou-days');
+  const sh = document.getElementById('seeyou-hours');
+  const sm = document.getElementById('seeyou-mins');
+  if (sd) sd.textContent = days;
+  if (sh) sh.textContent = hours;
+  if (sm) sm.textContent = mins;
 }
 
 updateCountdown();
@@ -1648,9 +1695,7 @@ function toggleMusic() {
   musicPlaying = !musicPlaying;
 }
 
-
 </script>
 
 </body>
-
 </html>

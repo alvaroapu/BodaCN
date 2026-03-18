@@ -1391,11 +1391,10 @@ document.getElementById('rsvpForm').addEventListener('submit', async function(e)
   
   try {
     const response = await fetch(WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      mode: 'no-cors', // Para evitar problemas CORS con Google Apps Script
-      body: JSON.stringify(data)
-    });
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(data)
+  });
     
     this.style.display = 'none';
     document.getElementById('formSuccess').classList.add('show');

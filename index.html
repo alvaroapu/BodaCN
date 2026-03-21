@@ -848,16 +848,6 @@ body {
   }
 }
 
-/* ========== HERO COUNTDOWN ========== */
-.hero-countdown-label {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  color: var(--text-light);
-  font-style: italic;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
 /* ========== SEE YOU SECTION ========== */
 .seeyou-title {
   font-family: 'Dancing Script', cursive;
@@ -893,6 +883,14 @@ body {
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-top: 4px;
+}
+
+.shoes-reminder {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-top: 20px;
 }
 
 /* ========== MUSIC BUTTON ========== */
@@ -1031,18 +1029,19 @@ body {
 /* Venue image */
 .venue-image-placeholder {
   width: 100%;
-  max-width: 500px;
-  height: 250px;
+  max-width: 400px;
+  height: 350px;
   border-radius: 12px;
   margin: 0 auto 30px;
   display: block;
   box-shadow: 0 10px 40px rgba(0,0,0,0.3);
   object-fit: cover;
+  object-position: center 60%;
 }
 
 @media (min-width: 768px) {
   .venue-image-placeholder {
-    height: 320px;
+    height: 420px;
   }
 }
 /* ========== WELCOME SCREEN ========== */
@@ -1265,8 +1264,7 @@ body.welcome-active {
     
     <p class="hero-date">11 · 07 · 2026</p>
     
-
-    <div class="seeyou-countdown" style="margin-bottom:0;">
+    <div class="seeyou-countdown" style="margin-top:20px;">
       <div class="seeyou-item">
         <span class="seeyou-number" id="countdown-days">--</span>
         <span class="seeyou-label">Días</span>
@@ -1296,7 +1294,7 @@ body.welcome-active {
     <h2 class="location-name reveal reveal-delay-1">Villa Cayetana</h2>
     <p class="location-address reveal reveal-delay-2">Cartaya, Huelva</p>
     
-    <img src="villa_cayetana.png" alt="Villa Cayetana" class="venue-image-placeholder reveal reveal-delay-2">
+    <img src="villa_cayetana.jpg" alt="Villa Cayetana" class="venue-image-placeholder reveal reveal-delay-2">
     
     <a href="https://maps.google.com/?q=Villa+Cayetana+Cartaya+Huelva" target="_blank" class="btn-directions reveal reveal-delay-3">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -1455,7 +1453,7 @@ body.welcome-active {
 <!-- ==================== SEE YOU SOON ==================== -->
 <section class="closing" style="padding-top:40px; padding-bottom:20px;">
   <div class="container" style="text-align:center;">
-    <p class="seeyou-title reveal">¡Nos vemos en!</p>
+    <p class="seeyou-title reveal">¡Allí nos vemos!</p>
     <div class="seeyou-countdown reveal reveal-delay-1">
       <div class="seeyou-item">
         <span class="seeyou-number" id="seeyou-days">--</span>
@@ -1470,6 +1468,7 @@ body.welcome-active {
         <span class="seeyou-label">Min</span>
       </div>
     </div>
+    <p class="shoes-reminder reveal reveal-delay-2">¡No olvides traer zapatos cómodos!</p>
   </div>
 </section>
 
@@ -1512,7 +1511,7 @@ body.welcome-active {
 </button>
 
 <script>
-
+  
 const WEBHOOK_URL = 'https://apuleyo-n8n.opxlub.easypanel.host/webhook/boda-cn';
 
 // ===== COUNTDOWN =====
@@ -1525,6 +1524,9 @@ function updateCountdown() {
     document.getElementById('countdown-days').textContent = '0';
     document.getElementById('countdown-hours').textContent = '0';
     document.getElementById('countdown-mins').textContent = '0';
+    document.getElementById('seeyou-days').textContent = '0';
+    document.getElementById('seeyou-hours').textContent = '0';
+    document.getElementById('seeyou-mins').textContent = '0';
     return;
   }
   
@@ -1532,6 +1534,7 @@ function updateCountdown() {
   const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
   
+  // Hero countdown
   document.getElementById('countdown-days').textContent = days;
   document.getElementById('countdown-hours').textContent = hours;
   document.getElementById('countdown-mins').textContent = mins;

@@ -215,6 +215,7 @@ body {
   letter-spacing: 6px;
   font-weight: 300;
   margin-top: 16px;
+  margin-bottom: 12px;
 }
 
 .hero-subtitle {
@@ -1250,7 +1251,7 @@ body.welcome-active {
 
   <div class="hero-content">
     <p class="hero-subtitle">¡Nos casamos!</p>
-    <p class="hero-subtitle" style="margin-top:-4px; font-size:0.95rem;">¿Vienes a bailarlo con nosotros?</p>
+    <p class="hero-subtitle" style="margin-top:0; margin-bottom:24px; font-size:0.95rem;">¿Vienes a bailarlo con nosotros?</p>
     
     <h1 class="hero-names">
       Carlos
@@ -1264,7 +1265,7 @@ body.welcome-active {
     
     <p class="hero-date">11 · 07 · 2026</p>
     
-    <div class="seeyou-countdown" style="margin-top:40px;">
+    <div class="seeyou-countdown" style="margin-top:32px;">
       <div class="seeyou-item">
         <span class="seeyou-number" id="countdown-days">--</span>
         <span class="seeyou-label">Días</span>
@@ -1294,7 +1295,7 @@ body.welcome-active {
     <h2 class="location-name reveal reveal-delay-1">Villa Cayetana</h2>
     <p class="location-address reveal reveal-delay-2">Cartaya, Huelva</p>
     
-    <img src="villa_cayetana.jpeg" alt="Villa Cayetana" class="venue-image-placeholder reveal reveal-delay-2">
+    <img src="villa_cayetana.jpg" alt="Villa Cayetana" class="venue-image-placeholder reveal reveal-delay-2">
     
     <a href="https://maps.google.com/?q=Villa+Cayetana+Cartaya+Huelva" target="_blank" class="btn-directions reveal reveal-delay-3">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -1512,8 +1513,12 @@ body.welcome-active {
 </button>
 
 <script>
-
-const WEBHOOK_URL = 'https://apuleyo-n8n.opxlub.easypanel.host/webhook/boda-cn';
+// =============================================================
+// CONFIGURACIÓN: Pon aquí la URL de tu webhook (N8N o Google Sheets)
+// =============================================================
+// Opción 1 — N8N: Crea un workflow con un nodo Webhook (POST) y pega la URL aquí
+// Opción 2 — Google Sheets: Crea un Google Apps Script web app (ver instrucciones abajo)
+const WEBHOOK_URL = ''; // <-- PEGAR URL AQUÍ
 
 // ===== COUNTDOWN =====
 function updateCountdown() {
